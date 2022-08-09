@@ -16,6 +16,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void ShowRank()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -29,10 +34,11 @@ public class MenuManager : MonoBehaviour
     {
         ScoreManager sm = ScoreManager.instance;
         sm.SetUserName(value);
-        sm.LoadBestScore();
+        //sm.LoadBestScore();
 
-        if (!string.IsNullOrEmpty(sm.GetBestUserName())){
-            scoreText.text = $"Best Score: {sm.GetBestUserName()} : {sm.GetBestScore()}";
+        string result = sm.GetHighestScore();
+        if (!string.IsNullOrEmpty(result)){
+            scoreText.text = $"Best Score: {result}";
         }
 
     }

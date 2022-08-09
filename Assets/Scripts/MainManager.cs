@@ -38,8 +38,7 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        ScoreManager sm = ScoreManager.instance;
-        bestScoreText.text = $"Best Score: {sm.GetBestUserName()} : {sm.GetBestScore()}";
+        bestScoreText.text = $"Best Score: {ScoreManager.instance.GetHighestScore()}";
     }
 
     private void Update()
@@ -77,8 +76,12 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
 
-        ScoreManager sm = ScoreManager.instance;
-        sm.SaveBestScore(m_Points);
-        bestScoreText.text = $"Best Score: {sm.GetBestUserName()} : {sm.GetBestScore()}";
+        ScoreManager.instance.SaveBestScore(m_Points);
+        bestScoreText.text = $"Best Score: {ScoreManager.instance.GetHighestScore()}";
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
